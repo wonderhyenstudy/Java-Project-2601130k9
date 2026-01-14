@@ -1,4 +1,4 @@
-package _2_test_260114.ex;
+package _2_test_260114;
 
 public class _0_Test_Condition_Ex {
     // 순서1, main -> 코드 스니펫으로 메인 메서드 자동 생성
