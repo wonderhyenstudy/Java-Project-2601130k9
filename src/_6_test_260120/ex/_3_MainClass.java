@@ -47,13 +47,19 @@ public class _3_MainClass {
                     System.out.println("이메일: ");
                     String email = sc.nextLine();
 
+                    // 260120_실습4_풀이, 순서7, 패스워드 정보도 받기.
+                    System.out.println("패스워드: ");
+                    String password = sc.nextLine();
+
                     System.out.println("나이: ");
                     // 문자열 -> 숫자 타입으로 변경 :
                     //Integer.parseInt : 문자열 -> 숫자로 타입 변경 해주는 기능.
                     int age = Integer.parseInt(sc.nextLine());
 
                     // 다형성 활용 : 부모 타입 배열에, 자식 객체 저장.
-                    _3_NormalMember newMember = new _3_NormalMember(name, email, age);
+                    // 260120_실습4_풀이, 순서8, 생성자가 기존 매개변수3개에서, 4개로 수정 해야함.
+//                    _3_NormalMember newMember = new _3_NormalMember(name, email, age);
+                    _3_NormalMember newMember = new _3_NormalMember(name, email, password, age);
                     // 배열에 저장.
                     members[count] = newMember;
                     // 인터페이스 메서드 호출
@@ -75,8 +81,54 @@ public class _3_MainClass {
                         }
                     }
                     break;
-                //종료
+                // 260120_실습4_풀이, 순서8, 로그인 기능 추가 및 작업
+                //로그인
                 case 3:
+                    // 순서대로 확인하기.
+                    System.out.println("\n====로그인===== ");
+                    // 이메일, 패스워드 정보를 전달 받아서,
+                    // 배열에 등록된, 이메일로 유저를 찾고, 패스워도 비교하고, 일치하면, 로그인,
+                    // 아니면, 로그인 불가.
+                    System.out.println("이메일 : ");
+                    String inputEmail = sc.nextLine();
+
+                    System.out.println("패스워드 : ");
+                    String inputPassword = sc.nextLine();
+
+                    // 상태 변수, 로그인 성공 여부 체크
+                    boolean isLogin = false;
+
+                    // 회원 정보가 들어 있는 배열을 전체 순회,
+                    // 등록된 회원 숫자 만큼만 반복, count 라는 변수를 활용.
+                    for (int i = 0; i < count; i++) {
+                        // 임시 메모리 상에 저장된 회원의 이메일과, 패스워드 확인하는 절차.
+                        // 저장된 회원 한명씩 꺼내서, member 에 담아두고,
+                        // 입력된 이메일, 패스워드와,,  불러온  이메일, 패스워드 일치 여부 확인?
+                        _3_MemberBase member = members[i];
+                        // 주의사항,
+                        // 문자열 비교시에는 사용하는 메서드
+                        // 문자열1.equals(문자열2) => 같으면, true, 다르면, false
+                        // member.getEmail() : 문자열1
+                        // inputEmail : 문자열2
+                        // 숫자 비교
+                        // 1 == 2 :  false
+                        if(member.getEmail().equals(inputEmail) &&
+                        member.getPassword().equals(inputPassword)
+                        ) {
+                            System.out.println("로그인 성공!! 환영합니다.~" + member.name+ "님");
+                            isLogin = true;
+//                            break;
+                        } // if 닫기
+                    } // for 닫기.
+
+                    // 로그인 실패인 경우,
+                    if(!isLogin) {
+                        System.out.println("로그인 실패: 정보가 일치하지 않습니다. ");
+                    }
+
+                // 260120_실습4_풀이, 순서9, 숫자만 변경, 기존 3에서, 4로 변경.
+                //종료
+                case 4:
                     System.out.println("프로그램을 종료합니다. ");
                     // 스캐너 자원 반납
                     sc.close();
