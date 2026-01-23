@@ -231,6 +231,8 @@ public class _3_MainClass extends JFrame {
                 int age = Integer.parseInt(ageStr);
                 //원래 기존 멤버에 객체 등록 하면 됨.
                 _3_NormalMember newMember = new _3_NormalMember(name,email,password,age);
+                // 맵에 새 회원을 담는 과정,
+                members.put(email,newMember);
                 //  기존에 파일에 쓰기 기능.
                 saveMembers(members);
                 printLog("회원 가입 완료 : " + email);
@@ -260,11 +262,9 @@ public class _3_MainClass extends JFrame {
         }
     }
 
-
-
-
     // 260123_화면_스윙_변경__순서10, 수정 필요함.
-    public static void saveMembers(Map<String, _3_MemberBase> members){
+    // static -> 인스턴스 메서드로 변경 합니다. :  static 제거.
+    public void saveMembers(Map<String, _3_MemberBase> members){
         BufferedWriter bw = null;
         try {
             bw = new BufferedWriter(new FileWriter(FILE_NAME));
@@ -273,10 +273,11 @@ public class _3_MainClass extends JFrame {
                 bw.write(line);
                 bw.newLine(); // 줄바꿈 함.
             }
-            System.out.println("파일 저장 완료 " + FILE_NAME);
+//            System.out.println("파일 저장 완료 " + FILE_NAME);
 
         } catch (IOException e){
-            System.out.println("오류가 발생 했습니다. 원인: " + e.getMessage());
+//            System.out.println("오류가 발생 했습니다. 원인: " + e.getMessage());
+            printLog("오류발생 : " + e.getMessage());
         }finally {
             if(bw != null) {
                 try {
@@ -289,7 +290,9 @@ public class _3_MainClass extends JFrame {
         }
     }
 
-    public static int loadMembers(Map<String, _3_MemberBase> members){
+    // 260123_화면_스윙_변경__순서11
+    // static -> 인스턴스 메서드로 변경 합니다. :  static 제거.
+    public  int loadMembers(Map<String, _3_MemberBase> members){
         File file = new File(FILE_NAME);
         if(!file.exists()) { // 해당 파일이 존재 안하니? true(파일없다)
             return 0;
