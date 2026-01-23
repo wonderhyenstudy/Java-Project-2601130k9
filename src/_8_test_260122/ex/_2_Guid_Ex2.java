@@ -1,8 +1,6 @@
 package _8_test_260122.ex;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class _2_Guid_Ex2 {
     public static void main(String[] args) {
@@ -34,11 +32,16 @@ public class _2_Guid_Ex2 {
         frame.setVisible(true);
 
         // 순서3, 이벤트 리스너 붙이기.
-        saveBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println(textArea.getText());
-            }
-        });
+//        saveBtn.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                System.out.println(textArea.getText());
+//            }
+//        });
+        // 람다식 버전 사용.
+        saveBtn.addActionListener(e -> {
+            System.out.println(textArea.getText());
+                }
+        );
     }
 }

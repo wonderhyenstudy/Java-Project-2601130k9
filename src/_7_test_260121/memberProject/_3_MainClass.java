@@ -227,6 +227,7 @@ public class _3_MainClass {
                         boolean isFound = false;
                         System.out.println("검색중....");
 
+                        // 성능이 느린 이유, 왜? 모든 회원을 다 대조해서, 검색해서.
                         for(_3_MemberBase m: members.values()) {
                             if(m.getName().contains(searchName)) {
                                 m.showInfo();
